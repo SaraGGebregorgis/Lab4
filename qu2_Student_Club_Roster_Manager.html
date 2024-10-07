@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Membership</title>
+    <style>
+        .selected {
+            text-decoration: line-through;
+            font-style: italic;
+            color: gray;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 5px 5px 0px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Student Club Roster</h1>
+
+    <h2>Add Students</h2>
+
+    <label for="studentname">Student Name</label>
+    <input id="studentname" name="studentname">
+    <br>
+    <label for="studentid">Student ID</label>
+    <input id="studentid" name="studentid">
+    <br>
+    <label for="studentgpa">Student GPA</label>
+    <input id="studentgpa" name="studentgpa" type="number">
+    <br>
+    <button id="addstudent">Add Student</button>
+
+    <h2>Student List</h2>
+    
+    <p>There are <span id="studentcount">0</span> student(s) in the club.</p>
+    <p>Click on a student's name to select them</p>
+
+    <ul id="studentlist">
+        <!-- JavaScript will create li elements here -->
+    </ul>
+
+    <button id="removeselectedstudents">Remove Selected Students</button>
+
+<script>
+let count = 0;
+let studentName = document.querySelector('#studentname')
+let studentId = document.querySelector('#studentid')
+let studentGpa = document.querySelector('#studentgpa')
+let addStudentButton = document.querySelector('#addstudent')
+let studentCountDisplay = document.querySelector('#studentcount')
+let studentList = document.querySelector('#studentlist')
+let removestudent = document.querySelector('#removeselectedstudents')
+
+addStudentButton.addEventListener('click', function() {
+    let name = studentName.value
+    let id = studentId.value
+    let gpa = studentGpa.value
+
+    // Input validation
+    if (!name || !id || gpa === '' || gpa < 0 || gpa > 4) {
+        alert('Please enter valid student information.')
+        return
+    }
+
+    count++; // Increment the count
+
+    // Create a new list item
+    let newStudentListItem = document.createElement('li')
+    newStudentListItem.innerHTML = `Name: ${name}, ID: ${id}, GPA: ${gpa}`
+    
+    // Add click event to toggle selection
+    newStudentListItem.addEventListener('click', function() {
+        this.classList.toggle('selected')
+    })
+
+    studentList.appendChild(newStudentListItem)
+
+    // Update the student count display
+    studentCountDisplay.textContent = count
+
+    // Clear input fields
+    studentName.value = ''
+    studentId.value = ''
+    studentGpa.value = ''
+})
+
+// Remove selected students functionality
+  removestudent.addEventListener('click', function() {
+    removestudent = document.querySelectorAll('.selected')
+
+
+    removestudent.forEach(function(studentItem) {
+        studentItem.remove() // Remove the selected student from the list
+        count // Decrement the count
+    })
+    studentCountDisplay.textContent = count; // Update the count display
+})
+</script>
+
+</body>
+</html>

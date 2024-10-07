@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+
+</head>
+<body>
+    <p>What is the capital of Wisconsin?</p>
+
+    <button class="wrong-answer">Bayfield</button>
+
+    <!-- Button for the correct answer option, with a unique ID -->
+    <button id="correct-answer">Madison</button>
+    <button class="wrong-answer">Milwaukee</button>
+
+    <p id="result"></p>
+
+<script>
+    // Select the button with the ID 'correct-answer'
+    let correctAnswerButton = document.querySelector('#correct-answer')
+   
+
+    let result = document.querySelector('#result')
+
+     // Select all buttons with the class 'wrong-answer' and store them in a variable
+    let wrongAnswerButtons = document.querySelectorAll('.wrong-answer')
+    
+    //add an event listener to both buttons
+    wrongAnswerButtons.forEach( function(wrongAnswerButton) { //loop- repeat one time for every wrong answer button
+        // When a wrong answer button is clicked
+        wrongAnswerButton.addEventListener('click', function() {
+            result.innerHTML = 'Wrong answer, try again?'
+
+        })
+    })
+
+    // we can try this style as well 
+    //its called imperitive-style loop, for loop
+    //for (let x=0; x< wrongANswerButtons.length; x++) {
+    // let wrongAnswerButton = wrongAnswerButton[x]
+    // then //add an event listener to both buttons without for each
+    //}
+
+    //add an event listener to one correct answer button
+    correctAnswerButton.addEventListener('click', function() {
+        result.innerHTML = 'Correct answer!'
+         // Change the background color of the correct answer button to cyan
+        correctAnswerButton.style.background = 'cyan'
+    } )
+
+</script>
+</body>
+</html>

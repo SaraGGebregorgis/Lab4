@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> 
+  <title>Document</title> 
+</head>
+<body>
+  <!-- Button for adding new list items -->
+  <button id="add-new-item">Click Here to Add Item</button>
+
+  <!-- Input field for the user to enter new list items -->
+  <input type="text" id="new-list-item-text" placeholder="Enter new item">
+
+  <!-- Unordered list to display added items -->
+  <ul id="list-of-items"></ul>
+
+  <script>
+    // Select the input element for new list item text
+    let newListItemTextInput = document.querySelector('#new-list-item-text')
+    
+    // Select the button to add the new item
+    let addNewItemButton = document.querySelector('#add-new-item')
+    
+    // Select the unordered list where items will be displayed
+    let listOfItems = document.querySelector('#list-of-items')
+
+    // Event listener for the button click to add a new item
+    addNewItemButton.addEventListener('click', function() {
+      // Get the value from the input field
+      let newInputText = newListItemTextInput.value
+
+      // Log the input text to the console for debugging
+      console.log(newInputText);
+
+      // Create a new list item (li) element
+      let newListItemElement = document.createElement('li')
+
+      // Set the inner HTML of the new list item to the user's input
+      newListItemElement.innerHTML = newInputText
+
+      // Append the new list item to the unordered list
+      listOfItems.appendChild(newListItemElement)
+
+      // Clear the input field for the next entry
+      newListItemTextInput.value = ''
+    });
+
+    // Additional feature: Clear all items from the list
+    let clearButton = document.createElement('button'); // Create a new button
+    clearButton.innerHTML = 'Clear List'; // Set button text
+    document.body.appendChild(clearButton); // Add button to the body
+
+    // Event listener for the clear button to remove all items
+    clearButton.addEventListener('click', function() {
+      // Clear the inner HTML of the list, removing all items
+      listOfItems.innerHTML = '' 
+
+      /*
+The purpose of the JavaScript code is to allow users to dynamically add new items to this list without refreshing the page. This is a common interactive feature in web applications.
+Creating a New List Item:
+When the user clicks the button (addButton),
+the code creates a new list item (<li>) using document.createElement('li'). 
+This means you're generating a new element in the DOM based on the user input. */
+    })
+
+  
+  </script>
+</body>
+</html>
+
+
+
+submitstudent.addEventListener('click', function() {
+
+  let name = studentname.value.trim()
+    if (name === '') {
+        alert('Please enter a student name.')
+        return
+    }
+
+    // Read the ID
+    let id = studentid.value.trim()
+    if (id === '') {
+        alert('Please enter a student ID.')
+        return
+    }
+
+    // Read the GPA
+    let gpa = studentgpa.value.trim()
+    if (gpa === '' || gpa < 0 || gpa > 4) {
+        alert('Please enter a valid GPA (between 0 and 4).')
+        return
+    }
+
+
+
+
+
+
+
+
+
+
+  </head>
+  <body>
+  
+      <h1>Student Club Roster</h1>
+  
+      <h2>Add Students</h2>
+  
+      <label for="student-name">Student Name</label><input id="student-name" name="student-name">
+      <br>
+      <label for="student-id">Student ID</label><input id="student-id" name="student-id">
+      <br>
+      <label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
+      <br>
+      <button id="add-student">Add Student</button>    
+  
+      <h2>Student List</h2>
+  
+      <p>There are 
+          <span id="student-count">
+            <!-- use JavaScript to count the number of students, and show here -->
+          </span> 
+      student(s) in the club.</p>
+      
+      <p>Click on a student's name to select them</p>
+  
+      <ul id="student-list">
+          <!-- use JavaScript to create li elements  -->
+      </ul>
+  
+      <button id="remove-selected-students">Remove selected students</button>
+  
+  <script>
+  
+  let studentname = document.querySelector('#student-name')
+  let studentid = document.querySelector('#student-id')
+  let studentgpa = document.querySelector('#student-gpa')
+  let submitstudent = document.querySelector('#add-student')
+  let numofstudents = document.querySelector('#student-count')
+  let studentlist = document.querySelector('#student-list')
+  let remove = document.querySelector('#remove-selected-students')
+  
+  
+  
+      //Create a new list
+      let newstudentlist = document.createElement('li')
+      newstudentlist.innerHTML = `Name: ${name}, id: ${id}, GPA: ${gpa} `
+      newstudentlist.addEventListener('click', function() {
+        newstudentlist.classList.toggle('selected')
+         // Toggle the 'selected' class
+      })
+    
+  
+      studentlist.appendChild(newstudentlist)
+  
+      newstudentlist.value = ''
+    
+  
+  
+  
+      remove.addEventListener('click', function() {
+        // Clear the inner HTML of the list, removing all items
+        studentlist.innerHTML = '' 
+  })
+  
+  </script>
+  </body>
+  </html>

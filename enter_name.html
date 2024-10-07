@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+
+</head>
+<body>
+<p>Please enter your name</p>
+<input type="text" id="username">
+<button id="save-user-name">Save</button>
+
+<p id="welcome-message"></p>
+<script>
+let saveButton = document.querySelector('#save-user-name')
+let nameInput = document.querySelector('#username')
+let welcomeMessage = document.querySelector('#welcome-message')
+
+// Add an event listener to the save button to handle click events
+saveButton.addEventListener('click', function(){
+     // Get the value entered in the name input field and store it in a variable
+    let name = nameInput.value
+
+    // Check if the entered name is less than 2 characters long
+    if (name.length < 2) {
+        // If the name is too short, display an error message in the welcome message paragraph  
+        welcomeMessage.innerHTML = 'Please enter at least 2 letters.' 
+    } else {
+      // If the name is valid, display a welcome message with the user's name  
+        welcomeMessage.innerHTML = 'Welcome, ' + name + '!'
+        
+    }
+
+})
+
+</script>
+
+</body>
+
+</html>
