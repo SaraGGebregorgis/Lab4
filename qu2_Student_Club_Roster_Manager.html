@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Club Membership</title>
-    <style>
-        .selected {
-            text-decoration: line-through;
-            font-style: italic;
-            color: gray;
-        }
-        input {
-            width: 100%;
-            padding: 5px;
-            margin: 5px 5px 5px 0px;
-            box-sizing: border-box;
-        }
-    </style>
+  <title>Club Membership</title>
+
+  <style>
+      
+      .selected {
+        text-decoration: line-through ;
+        font-style: italic;
+        color: gray;
+      }
+
+      input {
+          width: 100%;
+          padding: 5px;
+          margin: 5px 5px 5px 0px;
+          box-sizing: border-box;
+
+      }
+
+  </style>
+
 </head>
 <body>
 
@@ -22,83 +28,82 @@
 
     <h2>Add Students</h2>
 
-    <label for="studentname">Student Name</label>
-    <input id="studentname" name="studentname">
+    <label for="student-name">Student Name</label><input id="student-name" name="student-name">
     <br>
-    <label for="studentid">Student ID</label>
-    <input id="studentid" name="studentid">
+    <label for="student-id">Student ID</label><input id="student-id" name="student-id">
     <br>
-    <label for="studentgpa">Student GPA</label>
-    <input id="studentgpa" name="studentgpa" type="number">
+    <label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
     <br>
-    <button id="addstudent">Add Student</button>
+    <button id="add-student">Add Student</button>    
 
     <h2>Student List</h2>
+
+    <p>There are 
+        <span id="student-count">
+          <!-- use JavaScript to count the number of students, and show here -->
+        </span> 
+    student(s) in the club.</p>
     
-    <p>There are <span id="studentcount">0</span> student(s) in the club.</p>
     <p>Click on a student's name to select them</p>
 
-    <ul id="studentlist">
-        <!-- JavaScript will create li elements here -->
+    <ul id="student-list">
+        <!-- use JavaScript to create li elements  -->
     </ul>
 
-    <button id="removeselectedstudents">Remove Selected Students</button>
+    <button id="remove-selected-students">Remove selected students</button>
 
 <script>
-let count = 0;
-let studentName = document.querySelector('#studentname')
-let studentId = document.querySelector('#studentid')
-let studentGpa = document.querySelector('#studentgpa')
-let addStudentButton = document.querySelector('#addstudent')
-let studentCountDisplay = document.querySelector('#studentcount')
-let studentList = document.querySelector('#studentlist')
-let removestudent = document.querySelector('#removeselectedstudents')
+    let studentName = document.querySelector('#student-name')
+    let studentID = document.querySelector('#student-id')
+    let studentGPA = document.querySelector('#student-gpa')
+    let addStudent = document.querySelector('#add-student')
+    let studentCount = document.querySelector('#student-count')
+    let studentList = document.querySelector('#student-list')
+    let clearSlectedStudents = document.querySelector('#remove-selected-students')
+    let Studentcount = 0
 
-addStudentButton.addEventListener('click', function() {
-    let name = studentName.value
-    let id = studentId.value
-    let gpa = studentGpa.value
+    addStudent.addEventListener('click', function(){
+        let studentname = studentName.value 
+        let studentid = studentID.value 
+        let studentgpa = studentGPA.value
 
-    // Input validation
-    if (!name || !id || gpa === '' || gpa < 0 || gpa > 4) {
-        alert('Please enter valid student information.')
-        return
-    }
+        let errors = []
+        if (studentname.length == 0){
+            errors.push('Please enter your name.')
+        }
+        if (studentid == 0){
+            errors.push('Please enter your ID.')
+        } if (studentgpa.length == 0 || studentgpa > 4 || studentgpa < 0){
+            errors.push('Please enter your GPA.')
+        }
 
-    count++; // Increment the count
+        if (errors.length > 0) {
+            alert(errors.join('\n'))
+            return
+        }
+        
+        Studentcount++
+        if (Studentcount > 0) {
+            studentCount.innerHTML = Studentcount
+        }
+        
+        newstudentlist = document.createElement('li')
+        newstudentlist.innerHTML = `Name: ${studentname}, ID: ${studentid}, GPA: ${studentgpa}`
 
-    // Create a new list item
-    let newStudentListItem = document.createElement('li')
-    newStudentListItem.innerHTML = `Name: ${name}, ID: ${id}, GPA: ${gpa}`
+        studentList.appendChild(newstudentlist)
+
+        studentName.value = ''
+        studentID.value = ''
+        studentGPA.value = ''
+        
+    })
+
+    clearSlectedStudents.addEventListener('click', function(){
+        studentList.innerHTML = ''
+    })
     
-    // Add click event to toggle selection
-    newStudentListItem.addEventListener('click', function() {
-        this.classList.toggle('selected')
-    })
-
-    studentList.appendChild(newStudentListItem)
-
-    // Update the student count display
-    studentCountDisplay.textContent = count
-
-    // Clear input fields
-    studentName.value = ''
-    studentId.value = ''
-    studentGpa.value = ''
-})
-
-// Remove selected students functionality
-  removestudent.addEventListener('click', function() {
-    removestudent = document.querySelectorAll('.selected')
 
 
-    removestudent.forEach(function(studentItem) {
-        studentItem.remove() // Remove the selected student from the list
-        count // Decrement the count
-    })
-    studentCountDisplay.textContent = count; // Update the count display
-})
 </script>
-
 </body>
 </html>
